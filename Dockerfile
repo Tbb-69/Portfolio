@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:latest
+# Use a specific Node.js version as the base image
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /index
@@ -7,8 +7,8 @@ WORKDIR /index
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Update npm and install dependencies
+RUN npm install -g npm@latest && npm install --verbose
 
 # Copy the rest of the application code to the container
 COPY . .
